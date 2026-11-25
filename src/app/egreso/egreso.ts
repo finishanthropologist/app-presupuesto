@@ -1,25 +1,24 @@
 import { Component } from '@angular/core';
 import { EgresoService } from '../egreso-service';
 import { Egreso } from '../egreso';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
-  imports: [],
+  imports: [CurrencyPipe],
   selector: 'app-egreso',
   styleUrl: './egreso.css',
   templateUrl: './egreso.html',
   host: { 'class': 'col-12 col-md-6' },
 })
 export class EgresoComponent {
-  egresos: Egreso[] = [];
+  readonly egresos;
   
-    constructor(private egresoService: EgresoService){}
-  
-    ngOnInit(): void {
+    constructor(private egresoService: EgresoService){
       this.egresos = this.egresoService.egresos;
     }
   
-    eliminarRegistro(ingreso: Egreso){
-      let descripcionRegistro = ingreso.descripcion;
+    eliminarRegistro(egreso: Egreso){
+      let descripcionRegistro = egreso.descripcion;
       this.egresoService.eliminar(descripcionRegistro);
     }
 }

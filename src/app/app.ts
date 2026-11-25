@@ -1,7 +1,4 @@
-import { Component, OnInit} from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { Egreso } from './egreso';
-import { Ingreso } from './ingreso';
+import { Component } from '@angular/core';
 import { EgresoService } from './egreso-service';
 import { IngresoService } from './ingreso-service';
 import { Cabecero } from './cabecero/cabecero';
@@ -15,37 +12,26 @@ import { EgresoComponent } from './egreso/egreso';
   styleUrl: './app.css',
   templateUrl: './app.html',
 })
-export class App implements OnInit{
+export class App{
   tiulo = "App Presupuesto";
-  
-
-  egresos: Egreso[] = [];
-  ingresos: Ingreso[] = [];
 
   constructor(
     private egresoService: EgresoService,
     private ingresoService: IngresoService
   ) {}
 
-  ngOnInit(): void {
-    this.egresos = this.egresoService.egresos;
-    this.ingresos = this.ingresoService.ingresos;
-  }
-
   getIngresoTotal(){
-    let totalIngreso = 0;
-    for(let ingreso of this.ingresos){
-      totalIngreso += ingreso.precio;
-    }
-    return totalIngreso;
+    return this.ingresoService.ingresos().reduce(
+      (total, ingreso) => total + ingreso.precio,
+      0
+    );
   }
 
   getEgresoTotal(){
-    let totalEgreso = 0;
-    for(let egreso of this.egresos){
-      totalEgreso += egreso.precio;
-    }
-    return totalEgreso;
+    return this.egresoService.egresos().reduce(
+      (total, egreso) => total + egreso.precio,
+      0
+    );
   }
 
   getPorcentajeTotal(){

@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IngresoService } from '../ingreso-service';
 import { EgresoService } from '../egreso-service';
-import { Ingreso } from '../ingreso';
-import { Egreso } from '../egreso';
 
 @Component({
   imports: [FormsModule],
@@ -27,12 +25,10 @@ export class Formulario {
 
   agregarValor(): void{
     if(this.tipo === "ingresoOperacion"){
-      let nuevoIngreso = new Ingreso(this.descripcionInput, this.precioInput)
-      this.ingresoService.ingresos.push(nuevoIngreso);
+      this.ingresoService.agregar(this.descripcionInput, this.precioInput);
     }
     else if(this.tipo === "egresoOperacion"){
-      let nuevoEgreso = new Egreso(this.descripcionInput, this.precioInput)
-      this.egresoService.egresos.push(nuevoEgreso);
+      this.egresoService.agregar(this.descripcionInput, this.precioInput);
     }
 
     this.descripcionInput = "";

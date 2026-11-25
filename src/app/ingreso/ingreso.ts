@@ -1,20 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { IngresoService } from '../ingreso-service';
 import { Ingreso } from '../ingreso';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
-  imports: [],
+  imports: [CurrencyPipe],
   selector: 'app-ingreso',
   styleUrl: './ingreso.css',
   templateUrl: './ingreso.html',
   host: { 'class': 'col-12 col-md-6' },
 })
-export class IngresoComponent implements OnInit{
-  ingresos: Ingreso[] = [];
+export class IngresoComponent {
+  readonly ingresos;
 
-  constructor(private ingresoService: IngresoService){}
-
-  ngOnInit(): void {
+  constructor(private ingresoService: IngresoService){
     this.ingresos = this.ingresoService.ingresos;
   }
 

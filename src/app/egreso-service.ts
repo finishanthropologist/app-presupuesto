@@ -1,24 +1,28 @@
-import { Injectable} from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { Egreso } from './egreso';
 
 @Injectable({
     providedIn: "root"
 })
 export class EgresoService{
-    public egresos: Egreso[] = [new Egreso("Colegiaturas", 200), new Egreso("Viveres", 75)];
-    indiceDescripcion: number = 0;
+    private readonly egresosState = signal<Egreso[]>([
+        new Egreso("Colegiaturas", 200),
+        new Egreso("Viveres", 75)
+    ]);
+    readonly egresos = this.egresosState.asReadonly();
 
     constructor() {}
 
+    agregar(descripcion: string, precio: number) {
+        this.egresosState.update(egresos =>
+            [...egresos, new Egreso(descripcion, precio)]
+        );
+    }
+
     eliminar(descripcion: string) {
         const texto = descripcion.trim();
-        this.indiceDescripcion = this.egresos.findIndex(
-            (egreso: Egreso) => egreso.descripcion.trim() === texto
+        this.egresosState.update(egresos =>
+            egresos.filter(egreso => egreso.descripcion.trim() !== texto)
         );
-
-        if (this.indiceDescripcion !== -1) {
-            this.egresos.splice(this.indiceDescripcion, 1);
-        }
-
     }
 }

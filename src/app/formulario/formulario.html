@@ -11,7 +11,7 @@
             <input type="text" name="descripcionInput" class="form-control border-success" placeholder="Descripción" [(ngModel)]="descripcionInput" required />
           </div>
           <div class="col-auto">
-            <input type="number" name="precioInput" class="form-control border-success" placeholder="Valor" [(ngModel)]="precioInput" required />
+            <input type="number" name="precioInput" min="0" class="form-control border-success" placeholder="Valor" [(ngModel)]="precioInput" required />
           </div>
           <div class="col-auto">
             <button type="submit" class="btn btn-success">
