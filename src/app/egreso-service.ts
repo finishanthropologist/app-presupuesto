@@ -5,7 +5,7 @@ import { Egreso } from './egreso';
     providedIn: "root"
 })
 export class EgresoService{
-    public egresos: Egreso[] = [];
+    public egresos: Egreso[] = [new Egreso("Colegiaturas", 200), new Egreso("Viveres", 75)];
     indiceDescripcion: number = 0;
 
     constructor() {}

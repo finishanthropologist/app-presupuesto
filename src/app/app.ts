@@ -5,9 +5,12 @@ import { Ingreso } from './ingreso';
 import { EgresoService } from './egreso-service';
 import { IngresoService } from './ingreso-service';
 import { Cabecero } from './cabecero/cabecero';
+import { Formulario } from './formulario/formulario';
+import { IngresoComponent } from './ingreso/ingreso';
+import { EgresoComponent } from './egreso/egreso';
 
 @Component({
-  imports: [Cabecero],
+  imports: [Cabecero, Formulario, IngresoComponent, EgresoComponent],
   selector: 'app-root',
   styleUrl: './app.css',
   templateUrl: './app.html',
